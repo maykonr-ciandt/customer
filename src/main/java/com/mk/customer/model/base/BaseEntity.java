@@ -1,5 +1,6 @@
 package com.mk.customer.model.base;
 
+import com.mk.customer.messaging.BaseEntityMessageListener;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,8 @@ import java.util.UUID;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@EntityListeners(BaseEntityListener.class)
-public class BaseEntity implements Serializable {
+@EntityListeners(BaseEntityMessageListener.class)
+public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue

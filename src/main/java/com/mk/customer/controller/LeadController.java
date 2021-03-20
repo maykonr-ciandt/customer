@@ -1,5 +1,6 @@
 package com.mk.customer.controller;
 
+import com.mk.customer.dto.IdDto;
 import com.mk.customer.dto.LeadDto;
 import com.mk.customer.dto.mapper.LeadMapper;
 import com.mk.customer.model.Lead;
@@ -34,12 +35,12 @@ public class LeadController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<BaseEntity> insert(@RequestBody final LeadDto dto) {
+    public ResponseEntity<IdDto> insert(@RequestBody final LeadDto dto) {
         final Lead entity = LeadMapper.INSTANCE.toEntity(dto);
         final Lead insertedEntity = this.service.insert(entity);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new BaseEntity(insertedEntity.getId()));
+                .body(new IdDto(insertedEntity.getId()));
     }
 
     @PostMapping(

@@ -1,5 +1,6 @@
 package com.mk.customer.model;
 
+import com.mk.customer.messaging.BaseEntityMessage;
 import com.mk.customer.model.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import java.time.OffsetDateTime;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lead extends BaseEntity {
+public class Lead extends BaseEntity implements BaseEntityMessage {
 
     private String name;
 
@@ -45,5 +46,15 @@ public class Lead extends BaseEntity {
         this.setConverted(Boolean.TRUE);
         this.setActive(Boolean.FALSE);
         return this;
+    }
+
+    @Override
+    public String getTopicName() {
+        return "customer_leads";
+    }
+
+    @Override
+    public String getVersion() {
+        return "V1";
     }
 }

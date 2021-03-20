@@ -1,9 +1,9 @@
 package com.mk.customer.controller;
 
 import com.mk.customer.dto.CustomerDto;
+import com.mk.customer.dto.IdDto;
 import com.mk.customer.dto.mapper.CustomerMapper;
 import com.mk.customer.model.Customer;
-import com.mk.customer.model.base.BaseEntity;
 import com.mk.customer.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +31,11 @@ public class CustomerController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<BaseEntity> insert(@RequestBody final CustomerDto dto) {
+    public ResponseEntity<IdDto> insert(@RequestBody final CustomerDto dto) {
         final Customer entity = CustomerMapper.INSTANCE.toEntity(dto);
         final Customer insertedEntity = this.service.insert(entity);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new BaseEntity(insertedEntity.getId()));
+                .body(new IdDto(insertedEntity.getId()));
     }
 }
